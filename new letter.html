@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASLEF Newsletter - Inform, Inspire, Influence</title>
+    <link rel="stylesheet" href="news.css">
+    <link rel="stylesheet" href="new letter css.css">
+    <style>
+        /* Newsletter-specific styles */
+        .newsletter-hero {
+            background: linear-gradient(rgba(16, 185, 129, 0.9), rgba(30, 58, 138, 0.9)), 
+                        url('../images/newsletter-bg.jpg');
+            color: white;
+        }
+        .news-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .category-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .fun { background: #F59E0B; }
+        .teaching { background: #10B981; }
+        .world { background: #3B82F6; }
+    </style>
+</head>
+<body>
+    <!-- Reused Header from Homepage -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" alt="ASLEF Media"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home news.html">Home</a></li>
+                    <li><a href="podcast news.html">Podcast</a></li>
+                    <li><a href="new letter.html" class="active">Newsletter</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Newsletter Hero -->
+    <section class="newsletter-hero hero">
+        <div class="container">
+            <h1>ASLEF Newsletter</h1>
+            <p>Weekly curated insights to inform, educate, and brighten your day</p>
+            <div class="cta-buttons">
+                <a href="#subscribe" class="btn">Subscribe</a>
+                <a href="#latest" class="btn-outline">Latest Edition</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Grid -->
+    <section id="latest" class="newsletter-grid">
+        <div class="container">
+            <div class="section-header">
+                <h2>This Week's Highlights</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="fun">Fun</button>
+                    <button class="filter-btn" data-category="teaching">Teaching</button>
+                    <button class="filter-btn" data-category="world">World News</button>
+                </div>
+            </div>
+
+            <div class="news-grid">
+                <!-- Sample News Item 1 (Fun) -->
+                <article class="news-card" data-category="fun">
+                    <span class="category-label fun">Story</span>
+                    <img src="ngozi.jpg" alt="AI Art Trend">
+                    <div class="news-content">
+                        <h3>AI-Generated Art Goes Viral</h3>
+                        <p class="news-meta">July 17, 2025 • 1 min read</p>
+                        <p>Anthu anayi afa ndipo ena omwe chiwerengero chake sichikudzuwika  avulala modetsa nkhawa pa ngozi yomwe yachitika mmawa uno pa malo otchedwa chilanga m'boma la Balaka.
+Wofalitsa nkhani za chipatala chachikulu cha Machinga a Wongani Nyirenda atsimikiza za imfa ya anthuwa.
+"Pakadali pano talandira anthu ovulala ochulukirapo koma mwatsoka anthu anayi ndiomwe amwalira." atero a Nyirenda.
+Malipoti akusonyeza kuti galimoto la lorry lomwe anthuwa anakwera linaombana ndi galimoto lina lomwe limachokera mbali yosemphana ndi Lorry (Head on)
+Pakadali pano apolisi sanayankhulepo kanthu pa nkhaniyi
+Wolemba: Blessings Makuwira.</p>
+                        <a href="#" class="read-more">Read Story →</a>
+                    </div>
+                </article>
+
+                <!-- Sample News Item 2 (Teaching) -->
+                <article class="news-card" data-category="teaching">
+                    <span class="category-label teaching">news</span>
+                    <img src="dpp.jpg" alt="EdTech in Schools">
+                    <div class="news-content">
+                        <h3>Amene akufuna kudzaimira....</h3>
+                        <p class="news-meta">July 17, 2025 • 2 min read</p>
+                        <p>Amene akufuna kudzaimira ngati phungu wa dera la kumpoto cha kuzambwe kwa boma la Ntcheu a Everton Chimulirenji atuluka chipani cha DPP ndikulowa chipani cha UTM.
+A Chimulirenji auza Times360 Malawi kuti achita izi atalandira uphungu kuchokera kwa anthu a mdera lawo.
+Iwo ati akakamizika kutuluka  chipani cha DPP chimene amachikonda kuyambira kale, pofuna kukhala ndi mtendere wamu mtima.
+Iwo ati akuyembekezeka kulandiridwa mchipani cha UTM lero ndipo adzaimira chipanichi ngati phungu pa chisankho chikubwerachi.
+Posachedwapa iwo adalengeza kuti aima pa okha pa chisankhochi, chipani cha DPP chitasintha ganizo pa za yemwe adapambana, a Chimulirenji atapambana pa chisankho cha chipulula cha chipanichi.
+Wolemba Pemphero Malimba</p>
+                        <a href="#" class="read-more">Read Story →</a>
+                    </div>
+                </article>
+
+                <!-- Sample News Item 3 (World) -->
+                <article class="news-card" data-category="world">
+                    <span class="category-label world">World News</span>
+                    <img src="images/news/climate-deal.jpg" alt="Climate Agreement">
+                    <div class="news-content">
+                        <h3>Global Climate Agreement Reached</h3>
+                        <p class="news-meta">June 5, 2023 • 4 min read</p>
+                        <p>193 countries agree to unprecedented emissions targets with special provisions for developing nations...</p>
+                        <a href="#" class="read-more">Read Story →</a>
+                    </div>
+                </article>
+
+                <!-- Add more sample articles below -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Story 1-->
+    <section class="featured-story">
+        <div class="container">
+            <div class="featured-content">
+                <small class="featured-label">Editor's Pick</small>
+                <h2>🇵🇸 Gaza Stampede Leaves 20 Dead, Israel Strikes Escalate</h2>
+                <p class="excerpt">Over 70 people have died in Gaza following a stampede at a U.S.-backed food distribution 
+                    center and intensified Israeli strikes killing dozens—including children—amid mounting humanitarian alarm. 
+                    UNICEF reports over 17,000 children dead in the conflict....
+                    </p>
+                <div class="featured-meta">
+                    <img src="At-least-20-killed-in-crush-at-Gaza-Humanitarian-Foundation-food-hub.jpg" alt="Author" class="author-img">
+                    <div>
+                        <p class="author-name">Sachin K Chaurasiya</p>
+                        <p class="publish-date">5/19/20255 min read</p>
+                    </div>
+                </div>
+                <a href="https://www.accessiblelearning.in/top-world-news-may-11-17-2025-global-headlines-without-the-hype?utm_source=chatgpt.com" class="btn">Read Full Feature</a>
+            </div>
+            <div class="featured-image">
+                <img src="VGAGX7VOGBA47NERREXMUQNFRY.avif" alt="Happiness Research">
+            </div>
+        </div>
+
+      <!-- Featured Story 2 -->
+    <section class="featured-story">
+        <div class="container">
+            <div class="featured-content">
+                <small class="featured-label">Editor's Pick</small>
+                <h2>🇺🇸 U.S. Enables AI Chip Exports to China</h2>
+                <p class="excerpt">The Trump administration has lifted restrictions, allowing Nvidia to 
+                    export its H20 AI processors to China. The move bolsters China's AI capabilities and
+                     raises questions about U.S. strategic competitiveness.
+                    </p>
+                <div class="featured-meta">
+                    <img src="gettyimages-2205212848.webp" alt="Author" class="author-img">
+                    <div>
+                        <p class="author-name">Vsox Media,</p>
+                        <p class="publish-date">© 2025 Vox Media, LLC. All Rights Reserved</p>
+                    </div>
+                </div>
+                <a href="https://www.vox.com/future-perfect/419791/trump-nvidia-h20-china-ai-chip?utm_source=chatgpt.com" class="btn">Read Full Feature</a>
+            </div>
+            <div class="featured-image">
+                <img src="gettyimages-2205212848.webp" alt="Happiness Research">
+            </div>
+        </div>
+  
+    </section>
+
+    <!-- Subscribe Section -->
+    <section id="subscribe" class="subscribe-section">
+        <div class="container">
+            <div class="subscribe-card">
+                <h2>Get Our Newsletter</h2>
+                <p>Join 50,000+ readers who receive our weekly mix of world news, practical guides, and uplifting stories.</p>
+                <form class="subscribe-form">
+                    <input type="text" placeholder="Your Name">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit" class="btn">Subscribe Now</button>
+                </form>
+                <small>We respect your privacy. Unsubscribe at any time.</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reused Footer from Homepage -->
+    <footer>
+        <!-- ... -->
+    </footer>
+
+    <script src="news.java"></script>
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter news cards
+                const category = btn.dataset.category;
+                document.querySelectorAll('.news-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Content | ASLEF Media</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-green: #10b981;
+            --primary-orange: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 45px;
+            transition: var(--transition);
+        }
+        
+        .logo:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.05rem;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-blue);
+        }
+        
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .cta-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Explore Hero */
+        .explore-hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(16, 185, 129, 0.85));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .explore-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+        
+        .explore-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.95;
+        }
+        
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 18px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            padding-right: 180px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .search-container button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        
+        .search-container button:hover {
+            background: #e67e22;
+        }
+        
+        /* Filters Section */
+        .filters-section {
+            background: white;
+            padding: 40px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-btn:hover {
+            background: var(--light-gray);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .sort-select {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--light-gray);
+            background: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        /* Content Grid */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-blue);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .content-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .badge-podcast { background: var(--primary-blue); }
+        .badge-newsletter { background: var(--primary-orange); }
+        .badge-business { background: var(--primary-green); }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .content-card:hover .card-content h3 {
+            color: var(--primary-blue);
+        }
+        
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .card-meta i {
+            margin-right: 5px;
+            color: var(--primary-blue);
+        }
+        
+        .card-excerpt {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .read-more:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+            gap: 12px;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            background: #f8fafc;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .category-podcast { background: var(--primary-blue); }
+        .category-newsletter { background: var(--primary-orange); }
+        .category-business { background: var(--primary-green); }
+        .category-education { background: #8b5cf6; }
+        .category-tech { background: #ec4899; }
+        .category-sustainability { background: #14b8a6; }
+        
+        .category-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-count {
+            display: inline-block;
+            background: rgba(0,0,0,0.05);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid var(--light-gray);
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+        }
+        
+        .footer-logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            color: #e5e7eb;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+            opacity: 1;
+        }
+        
+        .footer-links a i {
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #9ca3af;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .explore-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .explore-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .search-container input {
+                padding-right: 25px;
+            }
+            
+            .search-container button {
+                position: relative;
+                width: 100%;
+                margin-top: 15px;
+                top: 0;
+                right: 0;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj48cGF0aCBmaWxsPSIjMjU2M2ViIiBkPSJNMTI1IDMwTDE4Ny4xMjYgNjIuNSAxMjUgOTUgNjIuODc0IDYyLjV6Ii8+PHBhdGggZmlsbD0iIzEwYjk4MSIgZD0iTTYyLjUgNjIuNUwzMCA5NSAyLjUgNjIuNSA2Mi41IDB6Ii8+PHBhdGggZmlsbD0iI2Y1OWUwYiIgZD0iTTE4Ny41IDYyLjVMMjIwIDk1IDE4Ny41IDEyNSAxODcuNSA2Mi41eiIvPjxwYXRoIGZpbGw9IiMxZjI5MzciIGQ9Ik0xODcuNSAxODcuNUwxNTAgMjIwIDE4Ny41IDE4Ny41eiIvPjxwYXRoIGZpbGw9IiMyNTYzZWIiIGQ9Ik0xODcuNSAxODcuNUwyMjAgMTU1IDE4Ny41IDEyNSAxODcuNSAxODcuNXoiLz48dGV4dCB4PSIxMjUiIHk9IjE4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMWYyOTM3Ij5BU0xFRiBNRURJQTwvdGV4dD48L3N2Zz4=" alt="ASLEF Media Logo">
+                <span class="logo-text">ASLEF MEDIA</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="home news.html">Home</a></li>
+                    <li><a href="podcast news.html">Podcast</a></li>
+                    <li><a href="new letter.html">Newsletter</a></li>
+                    <li><a href="content news.html" class="active">Explore</a></li>
+                    <li><a href="new letter.html">About</a></li>
+                </ul>
+            </nav>
+            
+            <a href="#" class="cta-button">Join Community</a>
+        </div>
+    </header>
+
+    <!-- Explore Hero -->
+    <section class="explore-hero">
+        <div class="container">
+            <h1>Explore Our Content</h1>
+            <p>Discover insights, stories, and knowledge across all our platforms</p>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search for content, topics, or keywords...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="container filters-container">
+            <div class="filter-group">
+                <button class="filter-btn active">
+                    <i class="fas fa-globe"></i> All Content
+                </button>
+                <button class="filter-btn">
+                    <i class="fas fa-podcast"></i> Podcasts
+                </button>
+                <button class="filter-btn">
+                    <i class="fas fa-newspaper"></i> Newsletters
+                </button>
+                <button class="filter-btn">
+                    <i class="fas fa-briefcase"></i> Business Network
+                </button>
+                <button class="filter-btn">
+                    <i class="fas fa-video"></i> Videos
+                </button>
+            </div>
+            
+            <div class="sort-group">
+                <select class="sort-select">
+                    <option>Sort by: Newest First</option>
+                    <option>Sort by: Most Popular</option>
+                    <option>Sort by: A to Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Grid -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Content</h2>
+                <p>Explore our latest insights across multiple platforms and formats</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Podcast">
+                        <span class="card-badge badge-podcast">Podcast</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>The Future of Sustainable Cities</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-clock"></i> 48 min</span>
+                            <span><i class="fas fa-calendar"></i> June 15, 2023</span>
+                        </div>
+                        <p class="card-excerpt">Urban planner Jane Mwangi discusses how African cities can grow sustainably while preserving community identity.</p>
+                        <a href="#" class="read-more">Listen Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="Newsletter">
+                        <span class="card-badge badge-newsletter">Newsletter</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>AI Innovations Transforming Industries</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-book"></i> 5 min read</span>
+                            <span><i class="fas fa-calendar"></i> June 10, 2023</span>
+                        </div>
+                        <p class="card-excerpt">How machine learning is revolutionizing healthcare, agriculture, and finance in unexpected ways.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Business">
+                        <span class="card-badge badge-business">Business</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>GreenTech Solutions: Pioneering Sustainability</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-building"></i> Featured</span>
+                            <span><i class="fas fa-map-marker"></i> Nairobi</span>
+                        </div>
+                        <p class="card-excerpt">Meet the startup making solar energy accessible to rural communities across East Africa.</p>
+                        <a href="#" class="read-more">View Profile <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Video">
+                        <span class="card-badge" style="background: #8b5cf6;">Video</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Digital Transformation in Education</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-clock"></i> 12 min</span>
+                            <span><i class="fas fa-calendar"></i> May 28, 2023</span>
+                        </div>
+                        <p class="card-excerpt">How technology is reshaping learning experiences across the continent.</p>
+                        <a href="#" class="read-more">Watch Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Podcast">
+                        <span class="card-badge badge-podcast">Podcast</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Fintech Revolution in Emerging Markets</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-clock"></i> 52 min</span>
+                            <span><i class="fas fa-calendar"></i> May 22, 2023</span>
+                        </div>
+                        <p class="card-excerpt">Exploring how mobile money is transforming financial inclusion across Africa.</p>
+                        <a href="#" class="read-more">Listen Now <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Newsletter">
+                        <span class="card-badge badge-newsletter">Newsletter</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>The Future of Remote Work</h3>
+                        <div class="card-meta">
+                            <span><i class="fas fa-book"></i> 7 min read</span>
+                            <span><i class="fas fa-calendar"></i> May 18, 2023</span>
+                        </div>
+                        <p class="card-excerpt">How distributed teams are reshaping the African tech landscape.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse by Category</h2>
+                <p>Find content that matches your interests and needs</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon category-podcast">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <h3>Podcasts</h3>
+                    <p>In-depth conversations with industry leaders and innovators.</p>
+                    <div class="category-count">142 Episodes</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon category-newsletter">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3>Newsletters</h3>
+                    <p>Weekly insights and analysis delivered to your inbox.</p>
+                    <div class="category-count">78 Editions</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon category-business">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Business Network</h3>
+                    <p>Profiles of innovative companies and entrepreneurs.</p>
+                    <div class="category-count">64 Profiles</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon category-education">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education</h3>
+                    <p>Resources for personal and professional development.</p>
+                    <div class="category-count">35 Resources</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon category-tech">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>Technology</h3>
+                    <p>The latest tech innovations and their impact on society.</p>
+                    <div class="category-count">89 Articles</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon category-sustainability">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Sustainability</h3>
+                    <p>Environmental solutions and sustainable business practices.</p>
+                    <div class="category-count">47 Features</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTI1IDMwTDE4Ny4xMjYgNjIuNSAxMjUgOTUgNjIuODc0IDYyLjV6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTYyLjUgNjIuNUwzMCA5NSAyLjUgNjIuNSA2Mi41IDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE4Ny41IDYyLjVMMjIwIDk1IDE4Ny41IDEyNSAxODcuNSA2Mi41eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODcuNSAxODcuNUwxNTAgMjIwIDE4Ny41IDE4Ny41eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODcuNSAxODcuNUwyMjAgMTU1IDE4Ny41IDEyNSAxODcuNSAxODcuNXoiLz48dGV4dCB4PSIxMjUiIHk9IjE4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIj5BU0xFRiBNRURJQTwvdGV4dD48L3N2Zz4=" alt="ASLEF Media Logo">
+                        <span>ASLEF MEDIA</span>
+                    </a>
+                    <p>Transforming information into inspiration and action since 2018. 
+                        Our mission is to empower individuals and businesses with knowledge that drives positive change.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home news.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="podcast news.html"><i class="fas fa-chevron-right"></i> Podcast</a></li>
+                        <li><a href="new letter.html"><i class="fas fa-chevron-right"></i> Newsletter</a></li>
+                        <li><a href="content news.html"><i class="fas fa-chevron-right"></i> Explore</a></li>
+                        <li><a href="news 1.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Content</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Latest Episodes</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Popular Articles</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Business Directory</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Advertise With Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ASLEF Media. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary-orange);"></i> for a better informed world</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real implementation, this would filter the content
+                    console.log(`Filtering by: ${this.textContent.trim()}`);
+                });
+            });
+            
+            // Sort functionality
+            const sortSelect = document.querySelector('.sort-select');
+            sortSelect.addEventListener('change', function() {
+                console.log(`Sorting by: ${this.value}`);
+            });
+            
+            // Search functionality
+            const searchForm = document.querySelector('.search-container');
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const searchInput = this.querySelector('input');
+                console.log(`Searching for: ${searchInput.value}`);
+                // In a real implementation, this would trigger a search
+            });
+            
+            // Pagination
+            const pageBtns = document.querySelectorAll('.page-btn');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('active')) return;
+                    
+                    // Remove active class from all buttons
+                    pageBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    console.log(`Navigating to page: ${this.textContent.trim()}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

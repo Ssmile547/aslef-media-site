@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASLEF Media Gallery | Music & Videos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-green: #10b981;
+            --primary-orange: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --border-radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 45px;
+            transition: var(--transition);
+        }
+        
+        .logo:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--light-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.05rem;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            color: white;
+        }
+        
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+        
+        /* Gallery Hero */
+        .gallery-hero {
+            text-align: center;
+            padding: 80px 0 40px;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 40px;
+            border-radius: var(--border-radius);
+        }
+        
+        .gallery-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .gallery-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            flex: 1;
+            max-width: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-box button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-box button:hover {
+            background: #1d4ed8;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-options select {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-options select:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .filter-options select option {
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tab-btn {
+            background: transparent;
+            color: var(--light-gray);
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: white;
+        }
+        
+        .tab-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .thumbnail-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .thumbnail-container img {
+            transform: scale(1.05);
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-overlay i {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .video-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .item-details {
+            padding: 20px;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .item-details h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .item-details h3 {
+            color: var(--primary-blue);
+        }
+        
+        .meta {
+            display: flex;
+            gap: 15px;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .excerpt {
+            color: var(--light-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        /* Audio Controls */
+        .audio-controls {
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary-blue);
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            margin-bottom: 10px;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .volume-level {
+            height: 100%;
+            background: var(--primary-green);
+            width: 80%;
+        }
+        
+        /* Actions */
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        .icon-only {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* Subscribe CTA */
+        .subscribe-cta {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: var(--border-radius);
+            padding: 60px 20px;
+            text-align: center;
+            margin: 60px 0;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .subscribe-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .subscribe-cta p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .platform-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+        }
+        
+        .spotify { background: rgba(29, 185, 84, 0.7); }
+        .apple { background: rgba(166, 166, 166, 0.7); }
+        .youtube { background: rgba(255, 0, 0, 0.7); }
+        
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+        
+        .footer-logo span {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            color: var(--light-gray);
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.9;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+            opacity: 1;
+        }
+        
+        .footer-links a i {
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Audio player status */
+        .playing-indicator {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .gallery-item.playing .playing-indicator {
+            display: block;
+        }
+        
+        .gallery-item.playing {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <!-- SVG logo -->
+                <svg width="45" height="45" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#2563eb" d="M125 30L187.126 62.5 125 95 62.874 62.5z"/>
+                    <path fill="#10b981" d="M62.5 62.5L30 95 2.5 62.5 62.5 0z"/>
+                    <path fill="#f59e0b" d="M187.5 62.5L220 95 187.5 125 187.5 62.5z"/>
+                    <path fill="#cbd5e1" d="M187.5 187.5L150 220 187.5 187.5z"/>
+                    <path fill="#2563eb" d="M187.5 187.5L220 155 187.5 125 187.5 187.5z"/>
+                </svg>
+                <span class="logo-text">ASLEF MEDIA</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="home news.html">Home</a></li>
+                    <li><a href="business css.css">Business</a></li>
+                    <li><a href="#" class="active">Gallery</a></li>
+                    <li><a href="new letter.html">Newsletter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Music & Video Gallery</h1>
+            <p>Discover our collection of music tracks and video content</p>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-bar">
+        <div class="container">
+            <div class="filter-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search content...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select id="type-filter">
+                        <option value="all">All Types</option>
+                        <option value="audio">Music</option>
+                        <option value="video">Videos</option>
+                    </select>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="pop">Pop</option>
+                        <option value="hiphop">Hip Hop</option>
+                        <option value="rnb">R&B</option>
+                        <option value="afrobeat">Afrobeat</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option value="newest">Newest First</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Content -->
+    <section class="gallery-content">
+        <div class="container">
+            <h2 class="section-title">Featured Content <span>(24 items)</span></h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="music-tab">Music</button>
+                <button class="tab-btn" data-tab="video-tab">Videos</button>
+            </div>
+            
+            <!-- Music Tab -->
+            <div id="music-tab" class="tab-content active">
+                <div class="gallery-grid">
+
+                    <!-- Music Item 1 -->
+                    <div class="gallery-item audio" data-audio="audio1">
+                        <div class="playing-indicator">Playing</div>
+                        <div class="thumbnail-container">
+                            <img src="reverse artwork.png">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Afrobeat</div>
+                            <h3>Miracle Chinga - Thamanga</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Jan 8, 2024</span>
+                                <span><i class="fas fa-clock"></i> 3:45</span>
+                                <span><i class="fas fa-eye"></i> 1.2K</span>
+                            </div>
+                            <p class="excerpt">Never give up - inspirational afrobeat track</p>
+                            
+                            <div class="audio-controls">
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                                <div class="time-display">
+                                    <span class="current-time">0:00</span>
+                                    <span class="duration">3:45</span>
+                                </div>
+                                <div class="volume-control">
+                                    <i class="fas fa-volume-up"></i>
+                                    <div class="volume-bar">
+                                        <div class="volume-level" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Music Item 2 -->
+                    <div class="gallery-item audio" data-audio="audio2">
+                        <div class="playing-indicator">Playing</div>
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Urban Groove">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Hip Hop</div>
+                            <h3>Urban Groove</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Dec 15, 2023</span>
+                                <span><i class="fas fa-clock"></i> 4:20</span>
+                                <span><i class="fas fa-eye"></i> 2.8K</span>
+                            </div>
+                            <p class="excerpt">Smooth beats and urban vibes</p>
+                            
+                            <div class="audio-controls">
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="time-display">
+                                    <span class="current-time">0:00</span>
+                                    <span class="duration">4:20</span>
+                                </div>
+                                <div class="volume-control">
+                                    <i class="fas fa-volume-up"></i>
+                                    <div class="volume-bar">
+                                        <div class="volume-level" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Music Item 3 -->
+                    <div class="gallery-item audio" data-audio="audio3">
+                        <div class="playing-indicator">Playing</div>
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Rhythm of the Night">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Pop</div>
+                            <h3>Rhythm of the Night</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Nov 22, 2023</span>
+                                <span><i class="fas fa-clock"></i> 3:15</span>
+                                <span><i class="fas fa-eye"></i> 3.4K</span>
+                            </div>
+                            <p class="excerpt">Upbeat pop track for your evening</p>
+                            
+                            <div class="audio-controls">
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                                <div class="time-display">
+                                    <span class="current-time">0:00</span>
+                                    <span class="duration">3:15</span>
+                                </div>
+                                <div class="volume-control">
+                                    <i class="fas fa-volume-up"></i>
+                                    <div class="volume-bar">
+                                        <div class="volume-level" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Music Item 4 -->
+                    <div class="gallery-item audio" data-audio="audio4">
+                        <div class="playing-indicator">Playing</div>
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Soulful Melody">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">R&B</div>
+                            <h3>Soulful Melody</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Oct 30, 2023</span>
+                                <span><i class="fas fa-clock"></i> 4:45</span>
+                                <span><i class="fas fa-eye"></i> 1.9K</span>
+                            </div>
+                            <p class="excerpt">Smooth R&B with soulful vocals</p>
+                            
+                            <div class="audio-controls">
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div class="time-display">
+                                    <span class="current-time">0:00</span>
+                                    <span class="duration">4:45</span>
+                                </div>
+                                <div class="volume-control">
+                                    <i class="fas fa-volume-up"></i>
+                                    <div class="volume-bar">
+                                        <div class="volume-level" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Tab -->
+            <div id="video-tab" class="tab-content">
+                <div class="gallery-grid">
+                    <!-- Video Item 1 -->
+
+                    <div class="gallery-item video">
+                        <div class="thumbnail-container">
+                            <img src="One Night _-_Micron Kellz _feat_-_Aliet.mp4" alt="Micron Kellz - One Night">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-badge"><i class="fas fa-video"></i> Video</span>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Music Video</div>
+                            <h3>Micron Kellz - One Night</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Nov 20, 2023</span>
+                                <span><i class="fas fa-clock"></i> 4:20</span>
+                                <span><i class="fas fa-eye"></i> 15.2K</span>
+                            </div>
+                            <p class="excerpt">Official music video for the hit track One Night</p>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Item 2 -->
+                    <div class="gallery-item video">
+                        <div class="thumbnail-container">
+                            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Behind the Scenes">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-badge"><i class="fas fa-video"></i> Video</span>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Documentary</div>
+                            <h3>Behind the Scenes: Studio Session</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Oct 12, 2023</span>
+                                <span><i class="fas fa-clock"></i> 12:45</span>
+                                <span><i class="fas fa-eye"></i> 8.7K</span>
+                            </div>
+                            <p class="excerpt">Exclusive look at the making of our latest album</p>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Item 3 -->
+                    <div class="gallery-item video">
+                        <div class="thumbnail-container">
+                            <img src="Rowland_Chapola_-_Avumbuluke_Official_Video_-Shot_by_Date_Media.(720p).mp4">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="video-badge"><i class="fas fa-video"></i> Video</span>
+                        </div>
+                        <div class="item-details">
+                            <div class="category-tag">Live Performance</div>
+                            <h3>ASLEF Live at Music Festival</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar-alt"></i> Sep 5, 2023</span>
+                                <span><i class="fas fa-clock"></i> 22:30</span>
+                                <span><i class="fas fa-eye"></i> 24.5K</span>
+                            </div>
+                            <p class="excerpt">Full concert from our headline performance</p>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn play-btn">
+                                    <i class="fas fa-play"></i> Play
+                                </button>
+                                <button class="action-btn icon-only" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Like">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn icon-only" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Item 4 -->
+  <!DOCTYPE html>
+
+  <link rel="stylesheet" href="video css.css">
+</head>
+<body>
+
+  <button class="open-video-btn" onclick="showAndPlay()">▶ Watch Episode</button>
+
+  <div id="video-overlay">
+    <div id="video-box">
+      <button class="close-btn" onclick="closeVideo()">✖</button>
+      <video id="myVideo" controls>
+        <source src="One Night _-_Micron Kellz _feat_-_Aliet.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-controls">
+        <button onclick="togglePlayPause()">⏯ Play/Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="video java.java"></script>
+</body>
+</html>
+
+
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe CTA -->
+    <section class="subscribe-cta">
+        <div class="container">
+            <h2>Never Miss New Content</h2>
+            <p>Subscribe to get notified when we release new music and videos</p>
+            <div class="platforms">
+                <a href="#" class="platform-btn spotify"><i class="fab fa-spotify"></i> Spotify</a>
+                <a href="#" class="platform-btn apple"><i class="fab fa-apple"></i> Apple Music</a>
+                <a href="#" class="platform-btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <svg width="40" height="40" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#2563eb" d="M125 30L187.126 62.5 125 95 62.874 62.5z"/>
+                            <path fill="#10b981" d="M62.5 62.5L30 95 2.5 62.5 62.5 0z"/>
+                            <path fill="#f59e0b" d="M187.5 62.5L220 95 187.5 125 187.5 62.5z"/>
+                            <path fill="#cbd5e1" d="M187.5 187.5L150 220 187.5 187.5z"/>
+                            <path fill="#2563eb" d="M187.5 187.5L220 155 187.5 125 187.5 187.5z"/>
+                        </svg>
+                        <span>ASLEF MEDIA</span>
+                    </a>
+                    <p>Transforming information into inspiration and action since 2020. Our mission is to empower individuals and businesses with knowledge that drives positive change.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="home news.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="bussiness news.html"><i class="fas fa-chevron-right"></i> Business</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="new letter.html"><i class="fas fa-chevron-right"></i> Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Content</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Music</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Videos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Podcasts</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Articles</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 ASLEF Media. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary-orange);"></i> for a better informed world</p>
+                <p>Inform • Inspire • Influence</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden audio elements -->
+    <div id="audio-container" style="display:none;">
+        <audio id="audio1" src="Smile-Ft-Micron-Kellz_Dont-Reverse_-_Prod-By-MegoASLEF-beats (1).mp3"></audio>
+        <audio id="audio2" src="LITILO_Emmanuel ft Bickicious(Prod By Mult Sounds).mp3"></audio>
+        <audio id="audio3" src="Miracle Chinga___Thamanga(never give up)--Official music video(M4A_128K).m4a"></audio>
+        <audio id="audio4" src="AUD-20250331-WA0011.mp3"></audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    // Show the target tab content
+                    const tabId = btn.dataset.tab;
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Pagination
+            const pageBtns = document.querySelectorAll('.page-btn');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    pageBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Volume control
+            const volumeBars = document.querySelectorAll('.volume-bar');
+            volumeBars.forEach(bar => {
+                bar.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const pos = (e.clientX - rect.left) / rect.width;
+                    const volumeLevel = this.querySelector('.volume-level');
+                    volumeLevel.style.width = `${pos * 100}%`;
+                    
+                    // Update actual audio volume
+                    const audioId = this.closest('.gallery-item').dataset.audio;
+                    if (audioId) {
+                        const audio = document.getElementById(audioId);
+                        audio.volume = pos;
+                    }
+                });
+            });
+            
+            // Audio player functionality
+            let currentAudio = null;
+            
+            // Format time (seconds to MM:SS)
+            function formatTime(seconds) {
+                const min = Math.floor(seconds / 60);
+                const sec = Math.floor(seconds % 60);
+                return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+            }
+            
+            // Initialize all audio players
+            const audioItems = document.querySelectorAll('.gallery-item.audio');
+            
+            audioItems.forEach(item => {
+                const audioId = item.dataset.audio;
+                const audio = document.getElementById(audioId);
+                const playBtn = item.querySelector('.play-btn');
+                const overlayBtn = item.querySelector('.play-overlay i');
+                const progressBar = item.querySelector('.progress');
+                const progressContainer = item.querySelector('.progress-bar');
+                const currentTimeEl = item.querySelector('.current-time');
+                const durationEl = item.querySelector('.duration');
+                
+                // Set initial duration
+                audio.addEventListener('loadedmetadata', function() {
+                    durationEl.textContent = formatTime(audio.duration);
+                });
+                
+                // Play/Pause functionality
+                function togglePlay() {
+                    // Pause any currently playing audio
+                    if (currentAudio && currentAudio !== audio) {
+                        const prevItem = currentAudio.closest('.gallery-item');
+                        const prevPlayBtn = prevItem.querySelector('.play-btn');
+                        
+                        currentAudio.pause();
+                        prevItem.classList.remove('playing');
+                        prevPlayBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+                    }
+                    
+                    if (audio.paused) {
+                        audio.play();
+                        playBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                        item.classList.add('playing');
+                        currentAudio = audio;
+                    } else {
+                        audio.pause();
+                        playBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+                        item.classList.remove('playing');
+                        currentAudio = null;
+                    }
+                }
+                
+                // Play button click
+                playBtn.addEventListener('click', togglePlay);
+                
+                // Overlay play button click
+                overlayBtn.addEventListener('click', togglePlay);
+                
+                // Update progress bar during playback
+                audio.addEventListener('timeupdate', function() {
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progressBar.style.width = `${percent}%`;
+                    currentTimeEl.textContent = formatTime(audio.currentTime);
+                });
+                
+                // Click on progress bar to seek
+                progressContainer.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const pos = (e.clientX - rect.left) / rect.width;
+                    audio.currentTime = pos * audio.duration;
+                });
+                
+                // Reset UI when audio ends
+                audio.addEventListener('ended', function() {
+                    playBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+                    item.classList.remove('playing');
+                    currentAudio = null;
+                });
+            });
+        });
+
+        function playVideo(id) {
+    const videos = document.querySelectorAll("video");
+
+    // Pause other videos
+    videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    // Play selected
+    const vid = document.getElementById(id);
+    if (vid) vid.play();
+    function showAndPlay(id) {
+    const vid = document.getElementById(id);
+    vid.style.display = "block";
+    vid.play();
+}
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Sustainable Cities",
+    "guest": "Jane Mwangi",
+    "duration": "48 min",
+    "audio": "episodes/ep1.mp3",
+    "cover": "covers/ep1.jpg",
+    "thumb": "covers/ep1-thumb.jpg"
+  },
+  {
+    "title": "AI in Africa",
+    "guest": "Dr. Adebayo",
+    "duration": "52 min",
+    "audio": "episodes/ep2.mp3",
+    "cover": "covers/ep2.jpg",
+    "thumb": "covers/ep2-thumb.jpg"
+  }
+]
